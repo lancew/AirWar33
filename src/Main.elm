@@ -1,8 +1,9 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, div, h1, img, table, td, text, tr)
+import Html exposing (Html, button, div, h1, h2, img, table, td, text, tr)
 import Html.Attributes exposing (height, id, src, style)
+import Html.Events exposing (onClick)
 
 
 
@@ -10,7 +11,9 @@ import Html.Attributes exposing (height, id, src, style)
 
 
 type alias Model =
-    { board : Board }
+    { board : Board
+    , turn : PlayerTurn
+    }
 
 
 type alias Board =
@@ -55,21 +58,26 @@ type alias Board =
 
 type Piece
     = None
-    | RocketW
-    | JetW
-    | RocketB
-    | JetB
+    | Rocket1
+    | Jet1
+    | Rocket2
+    | Jet2
+
+
+type PlayerTurn
+    = One
+    | Two
 
 
 init : ( Model, Cmd Msg )
 init =
     ( { board =
-            { a1 = RocketB
+            { a1 = Rocket1
             , a2 = None
             , a3 = None
             , a4 = None
             , a5 = None
-            , a6 = JetB
+            , a6 = Jet1
             , b1 = None
             , b2 = None
             , b3 = None
@@ -94,13 +102,14 @@ init =
             , e4 = None
             , e5 = None
             , e6 = None
-            , f1 = JetW
+            , f1 = Jet2
             , f2 = None
             , f3 = None
             , f4 = None
             , f5 = None
-            , f6 = RocketW
+            , f6 = Rocket2
             }
+      , turn = One
       }
     , Cmd.none
     )
@@ -112,11 +121,26 @@ init =
 
 type Msg
     = NoOp
+    | NextPlayer
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        NextPlayer ->
+            ( { model
+                | turn =
+                    if model.turn == One then
+                        Two
+
+                    else
+                        One
+              }
+            , Cmd.none
+            )
+
+        NoOp ->
+            ( model, Cmd.none )
 
 
 
@@ -249,26 +273,38 @@ view model =
                     ]
                 ]
             ]
+        , h2 [] [ text (turnString model.turn ++ "'s turn.") ]
+        , button [ onClick NextPlayer ] [ text "Next Player" ]
         ]
 
 
 pieceString : Piece -> String
 pieceString piece =
     case piece of
-        JetB ->
+        Jet1 ->
             "🛩️"
 
-        RocketB ->
+        Rocket1 ->
             "🚀"
 
-        JetW ->
+        Jet2 ->
             "🛸"
 
-        RocketW ->
+        Rocket2 ->
             "☄️"
 
         _ ->
             "☁️"
+
+
+turnString : PlayerTurn -> String
+turnString turn =
+    case turn of
+        One ->
+            "Player 1"
+
+        Two ->
+            "Player 2"
 
 
 

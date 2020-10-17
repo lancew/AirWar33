@@ -11,3 +11,15 @@ Using create-elm-app to bootstrap.
 > elm-app start
 
 ![Screenshot of initial game baord](https://raw.githubusercontent.com/lancew/AirWar33/main/board-1.png) 
+
+## TODO
+* Click to set a piece
+ * Click on a piece to change it to the other type
+* Click on a piece to "take" it.
+* Disallow placing a piece where it does not belong
+* Disallow clicking on pieces not added this turn
+* Scoreboard
+* Restart
+* Play against an AI ?
+* Play against online opponent
+* 

@@ -122,6 +122,7 @@ init =
 type Msg
     = NoOp
     | NextPlayer
+    | AddPiece String String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -136,6 +137,15 @@ update msg model =
                     else
                         One
               }
+            , Cmd.none
+            )
+
+        AddPiece row column ->
+            ( let
+                boardBefore =
+                    model.board
+              in
+              { model | board = { boardBefore | a2 = Rocket1 } }
             , Cmd.none
             )
 
@@ -156,7 +166,7 @@ view model =
                 [ td [ id "a1" ]
                     [ text (pieceString model.board.a1)
                     ]
-                , td [ id "a2" ]
+                , td [ id "a2", onClick (AddPiece "a" "1") ]
                     [ text (pieceString model.board.a2)
                     ]
                 , td [ id "a3" ]

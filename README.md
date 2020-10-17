@@ -9,3 +9,5 @@ Using create-elm-app to bootstrap.
 
 ## Start the app in dev with:
 > elm-app start
+
+![Screenshot of initial game baord](https://raw.githubusercontent.com/lancew/AirWar33/main/board-1.png) 

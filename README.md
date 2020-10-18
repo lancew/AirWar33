@@ -23,3 +23,7 @@ Using create-elm-app to bootstrap.
 * Play against an AI ?
 * Play against online opponent
 * 
+
+## Original Design
+
+![sketch of gameboard](https://raw.githubusercontent.com/lancew/AirWar33/main/design-1.png)

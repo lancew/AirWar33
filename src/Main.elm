@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Browser
 import Html exposing (Html, button, div, h1, h2, img, table, td, text, tr)
-import Html.Attributes exposing (height, id, src, style)
+import Html.Attributes exposing (class, height, id, src, style)
 import Html.Events exposing (onClick)
 
 
@@ -161,7 +161,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ h1 [] [ text "AirWar33" ]
-        , table []
+        , table [ class "board" ]
             [ tr []
                 [ td [ id "a1" ]
                     [ text (pieceString model.board.a1)

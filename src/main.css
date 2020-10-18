@@ -24,3 +24,10 @@ img {
   margin: 20px 0;
   max-width: 200px;
 }
+
+.board {
+ align-content: center;
+ margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}

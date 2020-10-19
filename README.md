@@ -22,7 +22,7 @@ Using create-elm-app to bootstrap.
 * Restart
 * Play against an AI ?
 * Play against online opponent
-* 
+* Migrate to use an multi-dimensional-array structure (https://package.elm-lang.org/packages/tortus/elm-array-2d/latest/ maybe)
 
 ## Original Design
 

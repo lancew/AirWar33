@@ -62,6 +62,7 @@ type Piece
     | Jet1
     | Rocket2
     | Jet2
+    | Explosion
 
 
 type PlayerTurn
@@ -276,6 +277,9 @@ pieceString piece =
         Rocket2 ->
             "☄️"
 
+        Explosion ->
+            "💥"
+
         _ ->
             "☁️"
 
@@ -296,6 +300,9 @@ togglePiece piece =
             Rocket2
 
         Rocket2 ->
+            Explosion
+
+        Explosion ->
             None
 
 

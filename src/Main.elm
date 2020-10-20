@@ -113,8 +113,8 @@ init =
             , f6 = Rocket2
             }
       , turn = One
-      , playerOneScore = 0
-      , playerTwoScore = 0
+      , playerOneScore = 2
+      , playerTwoScore = 2
       }
     , Cmd.none
     )
@@ -135,7 +135,9 @@ update msg model =
     case msg of
         NextPlayer ->
             ( { model
-                | turn =
+                | playerOneScore = updateScores One model
+                , playerTwoScore = updateScores Two model
+                , turn =
                     if model.turn == One then
                         Two
 
@@ -276,7 +278,7 @@ pieceString piece =
             "🚀"
 
         Jet2 ->
-            "\u{1F6F8}"
+            "🛸"
 
         Rocket2 ->
             "☄️"
@@ -320,6 +322,454 @@ turnString turn =
             "Player 2"
 
 
+playerOneScores : Board -> Int
+playerOneScores board =
+    (if board.a1 == Rocket1 || board.a1 == Jet1 then
+        1
+
+     else
+        0
+    )
+        + (if board.a2 == Rocket1 || board.a2 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.a3 == Rocket1 || board.a3 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.a4 == Rocket1 || board.a4 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.a5 == Rocket1 || board.a5 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.a6 == Rocket1 || board.a6 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.b1 == Rocket1 || board.b1 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.b2 == Rocket1 || board.b2 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.b3 == Rocket1 || board.b3 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.b4 == Rocket1 || board.b4 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.b5 == Rocket1 || board.b5 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.b6 == Rocket1 || board.b6 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.c1 == Rocket1 || board.c1 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.c2 == Rocket1 || board.c2 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.c3 == Rocket1 || board.c3 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.c4 == Rocket1 || board.c4 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.c5 == Rocket1 || board.c5 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.c6 == Rocket1 || board.c6 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.d1 == Rocket1 || board.d1 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.d2 == Rocket1 || board.d2 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.d3 == Rocket1 || board.d3 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.d4 == Rocket1 || board.d4 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.d5 == Rocket1 || board.d5 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.d6 == Rocket1 || board.d6 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.e1 == Rocket1 || board.e1 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.e2 == Rocket1 || board.e2 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.e3 == Rocket1 || board.e3 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.e4 == Rocket1 || board.e4 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.e5 == Rocket1 || board.e5 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.e6 == Rocket1 || board.e6 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.f1 == Rocket1 || board.f1 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.f2 == Rocket1 || board.f2 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.f3 == Rocket1 || board.f3 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.f4 == Rocket1 || board.f4 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.f5 == Rocket1 || board.f5 == Jet1 then
+            1
+
+           else
+            0
+          )
+        + (if board.f6 == Rocket1 || board.f6 == Jet1 then
+            1
+
+           else
+            0
+          )
+
+
+playerTwoScores board =
+    (if board.a1 == Rocket2 || board.a1 == Jet2 then
+        1
+
+     else
+        0
+    )
+        + (if board.a2 == Rocket2 || board.a2 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.a3 == Rocket2 || board.a3 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.a4 == Rocket2 || board.a4 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.a5 == Rocket2 || board.a5 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.a6 == Rocket2 || board.a6 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.b1 == Rocket2 || board.b1 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.b2 == Rocket2 || board.b2 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.b3 == Rocket2 || board.b3 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.b4 == Rocket2 || board.b4 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.b5 == Rocket2 || board.b5 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.b6 == Rocket2 || board.b6 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.c1 == Rocket2 || board.c1 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.c2 == Rocket2 || board.c2 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.c3 == Rocket2 || board.c3 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.c4 == Rocket2 || board.c4 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.c5 == Rocket2 || board.c5 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.c6 == Rocket2 || board.c6 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.d1 == Rocket2 || board.d1 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.d2 == Rocket2 || board.d2 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.d3 == Rocket2 || board.d3 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.d4 == Rocket2 || board.d4 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.d5 == Rocket2 || board.d5 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.d6 == Rocket2 || board.d6 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.e1 == Rocket2 || board.e1 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.e2 == Rocket2 || board.e2 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.e3 == Rocket2 || board.e3 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.e4 == Rocket2 || board.e4 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.e5 == Rocket2 || board.e5 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.e6 == Rocket2 || board.e6 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.f1 == Rocket2 || board.f1 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.f2 == Rocket2 || board.f2 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.f3 == Rocket2 || board.f3 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.f4 == Rocket2 || board.f4 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.f5 == Rocket2 || board.f5 == Jet2 then
+            1
+
+           else
+            0
+          )
+        + (if board.f6 == Rocket2 || board.f6 == Jet2 then
+            1
+
+           else
+            0
+          )
+
+
+updateScores player model =
+    case player of
+        One ->
+            playerOneScores model.board
+
+        Two ->
+            playerTwoScores model.board
+
+
 
 ---- PROGRAM ----
 
@@ -342,8 +792,8 @@ view : Model -> Html Msg
 view model =
     div []
         [ h1 [] [ text "AirWar33" ]
-        , h3 [] [ text "Player 1 - Player 2"]
-        , h3 [] [ text (String.fromInt model.playerOneScore ++ " - " ++ String.fromInt model.playerTwoScore )]
+        , h3 [] [ text "Player 1 - Player 2" ]
+        , h3 [] [ text (String.fromInt model.playerOneScore ++ " - " ++ String.fromInt model.playerTwoScore) ]
         , table [ class "board" ]
             [ tr []
                 [ td [ id "a1", onClick (TogglePiece "a1") ]

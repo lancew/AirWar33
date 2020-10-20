@@ -9,8 +9,8 @@ Using create-elm-app to bootstrap.
 
 ## Start the app in dev with:
 > elm-app start
-
-![Screenshot of initial game baord](https://raw.githubusercontent.com/lancew/AirWar33/main/board-1.png) 
+![Board as of 20 October 2020](https://raw.githubusercontent.com/lancew/AirWar33/main/board-2.png)
+ 
 
 ## TODO
 * Click to set a piece
@@ -24,6 +24,10 @@ Using create-elm-app to bootstrap.
 * Play against online opponent
 * Migrate to use an multi-dimensional-array structure (https://package.elm-lang.org/packages/tortus/elm-array-2d/latest/ maybe)
 
-## Original Design
+## Artifacts
 
+### First draft game board
+![Screenshot of initial game baord](https://raw.githubusercontent.com/lancew/AirWar33/main/board-1.png)
+
+### Original Sketch of game board
 ![sketch of gameboard](https://raw.githubusercontent.com/lancew/AirWar33/main/design-1.png)

@@ -12,17 +12,17 @@ Using create-elm-app to bootstrap.
 ![Board as of 20 October 2020](https://raw.githubusercontent.com/lancew/AirWar33/main/board-2.png)
  
 
-## TODO
-* Click to set a piece
- * Click on a piece to change it to the other type
-* Click on a piece to "take" it.
-* Disallow placing a piece where it does not belong
-* Disallow clicking on pieces not added this turn
-* Scoreboard
-* Restart
-* Play against an AI ?
-* Play against online opponent
-* Migrate to use an multi-dimensional-array structure (https://package.elm-lang.org/packages/tortus/elm-array-2d/latest/ maybe)
+## TODO (☐ ☑ ☒)
+* ☐ Click to set a piece
+ * ☐ Click on a piece to change it to the other type
+* ☐ Click on a piece to "take" it.
+* ☐ Disallow placing a piece where it does not belong
+* ☐ Disallow clicking on pieces not added this turn
+* ☑ Scoreboard
+* ☐ Restart
+* ☐ Play against an AI ?
+* ☐ Play against online opponent
+* ☐ Migrate to use an multi-dimensional-array structure (https://package.elm-lang.org/packages/tortus/elm-array-2d/latest/ maybe)
 
 ## Artifacts
 

@@ -14,7 +14,7 @@ Using create-elm-app to bootstrap.
 
 ## TODO (☐ ☑ ☒)
 * ☐ Click to set a piece
- * ☐ Click on a piece to change it to the other type
+    * ☐ Click on a piece to change it to the other type
 * ☐ Click on a piece to "take" it.
 * ☐ Disallow placing a piece where it does not belong
 * ☐ Disallow clicking on pieces not added this turn

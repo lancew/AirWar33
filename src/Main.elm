@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, button, div, h1, h2, img, table, td, text, tr)
+import Html exposing (Html, button, div, h1, h2, h3, img, table, td, text, tr)
 import Html.Attributes exposing (class, height, id, src, style)
 import Html.Events exposing (onClick)
 
@@ -13,6 +13,8 @@ import Html.Events exposing (onClick)
 type alias Model =
     { board : Board
     , turn : PlayerTurn
+    , playerOneScore : Int
+    , playerTwoScore : Int
     }
 
 
@@ -111,6 +113,8 @@ init =
             , f6 = Rocket2
             }
       , turn = One
+      , playerOneScore = 0
+      , playerTwoScore = 0
       }
     , Cmd.none
     )
@@ -338,6 +342,8 @@ view : Model -> Html Msg
 view model =
     div []
         [ h1 [] [ text "AirWar33" ]
+        , h3 [] [ text "Player 1 - Player 2"]
+        , h3 [] [ text (String.fromInt model.playerOneScore ++ " - " ++ String.fromInt model.playerTwoScore )]
         , table [ class "board" ]
             [ tr []
                 [ td [ id "a1", onClick (TogglePiece "a1") ]

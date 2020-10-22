@@ -15,6 +15,7 @@ type alias Model =
     , turn : PlayerTurn
     , playerOneScore : Int
     , playerTwoScore : Int
+    , previousBoard : Board
     }
 
 
@@ -115,6 +116,44 @@ init =
       , turn = One
       , playerOneScore = 2
       , playerTwoScore = 2
+      , previousBoard =
+            { a1 = Rocket1
+            , a2 = None
+            , a3 = None
+            , a4 = None
+            , a5 = None
+            , a6 = Jet1
+            , b1 = None
+            , b2 = None
+            , b3 = None
+            , b4 = None
+            , b5 = None
+            , b6 = None
+            , c1 = None
+            , c2 = None
+            , c3 = None
+            , c4 = None
+            , c5 = None
+            , c6 = None
+            , d1 = None
+            , d2 = None
+            , d3 = None
+            , d4 = None
+            , d5 = None
+            , d6 = None
+            , e1 = None
+            , e2 = None
+            , e3 = None
+            , e4 = None
+            , e5 = None
+            , e6 = None
+            , f1 = Jet2
+            , f2 = None
+            , f3 = None
+            , f4 = None
+            , f5 = None
+            , f6 = Rocket2
+            }
       }
     , Cmd.none
     )
@@ -143,6 +182,7 @@ update msg model =
 
                     else
                         One
+                , previousBoard = model.board
               }
             , Cmd.none
             )
@@ -151,121 +191,151 @@ update msg model =
             let
                 boardBefore =
                     model.board
+
+                isValidMove =
+                    validMove location model
             in
-            case location of
-                "a1" ->
-                    ( { model | board = { boardBefore | a1 = togglePiece boardBefore.a1 } }, Cmd.none )
+            if not isValidMove then
+                ( model, Cmd.none )
 
-                "a2" ->
-                    ( { model | board = { boardBefore | a2 = togglePiece boardBefore.a2 } }, Cmd.none )
+            else
+                case location of
+                    "a1" ->
+                        ( { model | board = { boardBefore | a1 = togglePiece boardBefore.a1 } }, Cmd.none )
 
-                "a3" ->
-                    ( { model | board = { boardBefore | a3 = togglePiece boardBefore.a3 } }, Cmd.none )
+                    "a2" ->
+                        ( { model | board = { boardBefore | a2 = togglePiece boardBefore.a2 } }, Cmd.none )
 
-                "a4" ->
-                    ( { model | board = { boardBefore | a4 = togglePiece boardBefore.a4 } }, Cmd.none )
+                    "a3" ->
+                        ( { model | board = { boardBefore | a3 = togglePiece boardBefore.a3 } }, Cmd.none )
 
-                "a5" ->
-                    ( { model | board = { boardBefore | a5 = togglePiece boardBefore.a5 } }, Cmd.none )
+                    "a4" ->
+                        ( { model | board = { boardBefore | a4 = togglePiece boardBefore.a4 } }, Cmd.none )
 
-                "a6" ->
-                    ( { model | board = { boardBefore | a6 = togglePiece boardBefore.a6 } }, Cmd.none )
+                    "a5" ->
+                        ( { model | board = { boardBefore | a5 = togglePiece boardBefore.a5 } }, Cmd.none )
 
-                "b1" ->
-                    ( { model | board = { boardBefore | b1 = togglePiece boardBefore.b1 } }, Cmd.none )
+                    "a6" ->
+                        ( { model | board = { boardBefore | a6 = togglePiece boardBefore.a6 } }, Cmd.none )
 
-                "b2" ->
-                    ( { model | board = { boardBefore | b2 = togglePiece boardBefore.b2 } }, Cmd.none )
+                    "b1" ->
+                        ( { model | board = { boardBefore | b1 = togglePiece boardBefore.b1 } }, Cmd.none )
 
-                "b3" ->
-                    ( { model | board = { boardBefore | b3 = togglePiece boardBefore.b3 } }, Cmd.none )
+                    "b2" ->
+                        ( { model | board = { boardBefore | b2 = togglePiece boardBefore.b2 } }, Cmd.none )
 
-                "b4" ->
-                    ( { model | board = { boardBefore | b4 = togglePiece boardBefore.b4 } }, Cmd.none )
+                    "b3" ->
+                        ( { model | board = { boardBefore | b3 = togglePiece boardBefore.b3 } }, Cmd.none )
 
-                "b5" ->
-                    ( { model | board = { boardBefore | b5 = togglePiece boardBefore.b5 } }, Cmd.none )
+                    "b4" ->
+                        ( { model | board = { boardBefore | b4 = togglePiece boardBefore.b4 } }, Cmd.none )
 
-                "b6" ->
-                    ( { model | board = { boardBefore | b6 = togglePiece boardBefore.b6 } }, Cmd.none )
+                    "b5" ->
+                        ( { model | board = { boardBefore | b5 = togglePiece boardBefore.b5 } }, Cmd.none )
 
-                "c1" ->
-                    ( { model | board = { boardBefore | c1 = togglePiece boardBefore.c1 } }, Cmd.none )
+                    "b6" ->
+                        ( { model | board = { boardBefore | b6 = togglePiece boardBefore.b6 } }, Cmd.none )
 
-                "c2" ->
-                    ( { model | board = { boardBefore | c2 = togglePiece boardBefore.c2 } }, Cmd.none )
+                    "c1" ->
+                        ( { model | board = { boardBefore | c1 = togglePiece boardBefore.c1 } }, Cmd.none )
 
-                "c3" ->
-                    ( { model | board = { boardBefore | c3 = togglePiece boardBefore.c3 } }, Cmd.none )
+                    "c2" ->
+                        ( { model | board = { boardBefore | c2 = togglePiece boardBefore.c2 } }, Cmd.none )
 
-                "c4" ->
-                    ( { model | board = { boardBefore | c4 = togglePiece boardBefore.c4 } }, Cmd.none )
+                    "c3" ->
+                        ( { model | board = { boardBefore | c3 = togglePiece boardBefore.c3 } }, Cmd.none )
 
-                "c5" ->
-                    ( { model | board = { boardBefore | c5 = togglePiece boardBefore.c5 } }, Cmd.none )
+                    "c4" ->
+                        ( { model | board = { boardBefore | c4 = togglePiece boardBefore.c4 } }, Cmd.none )
 
-                "c6" ->
-                    ( { model | board = { boardBefore | c6 = togglePiece boardBefore.c6 } }, Cmd.none )
+                    "c5" ->
+                        ( { model | board = { boardBefore | c5 = togglePiece boardBefore.c5 } }, Cmd.none )
 
-                "d1" ->
-                    ( { model | board = { boardBefore | d1 = togglePiece boardBefore.d1 } }, Cmd.none )
+                    "c6" ->
+                        ( { model | board = { boardBefore | c6 = togglePiece boardBefore.c6 } }, Cmd.none )
 
-                "d2" ->
-                    ( { model | board = { boardBefore | d2 = togglePiece boardBefore.d2 } }, Cmd.none )
+                    "d1" ->
+                        ( { model | board = { boardBefore | d1 = togglePiece boardBefore.d1 } }, Cmd.none )
 
-                "d3" ->
-                    ( { model | board = { boardBefore | d3 = togglePiece boardBefore.d3 } }, Cmd.none )
+                    "d2" ->
+                        ( { model | board = { boardBefore | d2 = togglePiece boardBefore.d2 } }, Cmd.none )
 
-                "d4" ->
-                    ( { model | board = { boardBefore | d4 = togglePiece boardBefore.d4 } }, Cmd.none )
+                    "d3" ->
+                        ( { model | board = { boardBefore | d3 = togglePiece boardBefore.d3 } }, Cmd.none )
 
-                "d5" ->
-                    ( { model | board = { boardBefore | d5 = togglePiece boardBefore.d5 } }, Cmd.none )
+                    "d4" ->
+                        ( { model | board = { boardBefore | d4 = togglePiece boardBefore.d4 } }, Cmd.none )
 
-                "d6" ->
-                    ( { model | board = { boardBefore | d6 = togglePiece boardBefore.d6 } }, Cmd.none )
+                    "d5" ->
+                        ( { model | board = { boardBefore | d5 = togglePiece boardBefore.d5 } }, Cmd.none )
 
-                "e1" ->
-                    ( { model | board = { boardBefore | e1 = togglePiece boardBefore.e1 } }, Cmd.none )
+                    "d6" ->
+                        ( { model | board = { boardBefore | d6 = togglePiece boardBefore.d6 } }, Cmd.none )
 
-                "e2" ->
-                    ( { model | board = { boardBefore | e2 = togglePiece boardBefore.e2 } }, Cmd.none )
+                    "e1" ->
+                        ( { model | board = { boardBefore | e1 = togglePiece boardBefore.e1 } }, Cmd.none )
 
-                "e3" ->
-                    ( { model | board = { boardBefore | e3 = togglePiece boardBefore.e3 } }, Cmd.none )
+                    "e2" ->
+                        ( { model | board = { boardBefore | e2 = togglePiece boardBefore.e2 } }, Cmd.none )
 
-                "e4" ->
-                    ( { model | board = { boardBefore | e4 = togglePiece boardBefore.e4 } }, Cmd.none )
+                    "e3" ->
+                        ( { model | board = { boardBefore | e3 = togglePiece boardBefore.e3 } }, Cmd.none )
 
-                "e5" ->
-                    ( { model | board = { boardBefore | e5 = togglePiece boardBefore.e5 } }, Cmd.none )
+                    "e4" ->
+                        ( { model | board = { boardBefore | e4 = togglePiece boardBefore.e4 } }, Cmd.none )
 
-                "e6" ->
-                    ( { model | board = { boardBefore | e6 = togglePiece boardBefore.e6 } }, Cmd.none )
+                    "e5" ->
+                        ( { model | board = { boardBefore | e5 = togglePiece boardBefore.e5 } }, Cmd.none )
 
-                "f1" ->
-                    ( { model | board = { boardBefore | f1 = togglePiece boardBefore.f1 } }, Cmd.none )
+                    "e6" ->
+                        ( { model | board = { boardBefore | e6 = togglePiece boardBefore.e6 } }, Cmd.none )
 
-                "f2" ->
-                    ( { model | board = { boardBefore | f2 = togglePiece boardBefore.f2 } }, Cmd.none )
+                    "f1" ->
+                        ( { model | board = { boardBefore | f1 = togglePiece boardBefore.f1 } }, Cmd.none )
 
-                "f3" ->
-                    ( { model | board = { boardBefore | f3 = togglePiece boardBefore.f3 } }, Cmd.none )
+                    "f2" ->
+                        ( { model | board = { boardBefore | f2 = togglePiece boardBefore.f2 } }, Cmd.none )
 
-                "f4" ->
-                    ( { model | board = { boardBefore | f4 = togglePiece boardBefore.f4 } }, Cmd.none )
+                    "f3" ->
+                        ( { model | board = { boardBefore | f3 = togglePiece boardBefore.f3 } }, Cmd.none )
 
-                "f5" ->
-                    ( { model | board = { boardBefore | f5 = togglePiece boardBefore.f5 } }, Cmd.none )
+                    "f4" ->
+                        ( { model | board = { boardBefore | f4 = togglePiece boardBefore.f4 } }, Cmd.none )
 
-                "f6" ->
-                    ( { model | board = { boardBefore | f6 = togglePiece boardBefore.f6 } }, Cmd.none )
+                    "f5" ->
+                        ( { model | board = { boardBefore | f5 = togglePiece boardBefore.f5 } }, Cmd.none )
 
-                _ ->
-                    ( { model | board = { boardBefore | f3 = Rocket1 } }, Cmd.none )
+                    "f6" ->
+                        ( { model | board = { boardBefore | f6 = togglePiece boardBefore.f6 } }, Cmd.none )
+
+                    _ ->
+                        ( { model | board = { boardBefore | f3 = Rocket1 } }, Cmd.none )
 
         NoOp ->
             ( model, Cmd.none )
+
+
+validMove : String -> Model -> Bool
+validMove location model =
+    case testExplosion location model of
+        False ->
+            False
+
+        True ->
+            True
+
+
+testExplosion location model =
+    case location of
+        "a1" ->
+            if model.previousBoard.a1 == Explosion then
+                False
+
+            else
+                True
+
+        _ ->
+            True
 
 
 pieceString : Piece -> String

@@ -82,7 +82,44 @@ init =
       , turn = One
       , playerOneScore = 2
       , playerTwoScore = 2
-      , previousBoard = Array.initialize 36 (always None)
+      , previousBoard = Array.fromList
+                [ Jet1
+                , None
+                , None
+                , None
+                , None
+                , Rocket1
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , None
+                , Rocket2
+                , None
+                , None
+                , None
+                , None
+                , Jet2
+                ]
       }
     , Cmd.none
     )
@@ -121,13 +158,26 @@ update msg model =
                 piece =
                     Array.get location model.board
 
-                newPiece =
-                    case piece of
-                        Just p ->
-                            togglePiece p
 
-                        Nothing ->
-                            None
+                validMove = 
+                    case piece of
+                       Just p -> isValid location p model
+                       Nothing -> False    
+
+                newPiece =
+                    case validMove of
+                        True ->
+                            case piece of
+                                Just p ->
+                                    togglePiece p
+
+                                Nothing ->
+                                    None
+
+                        False -> 
+                            case piece of
+                               Just p -> p
+                               Nothing -> None
 
                 newBoard =
                     Array.set location newPiece model.board
@@ -136,6 +186,22 @@ update msg model =
 
         NoOp ->
             ( model, Cmd.none )
+
+
+isValid : Int -> Piece -> Model -> Bool
+isValid location piece model=
+    let
+        oldPiece =
+                    Array.get location model.previousBoard
+          
+    in
+        case oldPiece of
+            Just p ->
+                case p of
+                   Explosion -> False
+                   _ -> True
+            Nothing -> False
+
 
 
 getPiece location model =

@@ -82,7 +82,8 @@ init =
       , turn = One
       , playerOneScore = 2
       , playerTwoScore = 2
-      , previousBoard = Array.fromList
+      , previousBoard =
+            Array.fromList
                 [ Jet1
                 , None
                 , None
@@ -156,28 +157,13 @@ update msg model =
         TogglePiece location ->
             let
                 piece =
-                    Array.get location model.board
+                    getPiece location model
 
-
-                validMove = 
-                    case piece of
-                       Just p -> isValid location p model
-                       Nothing -> False    
+                oldPiece =
+                    getOldPiece location model
 
                 newPiece =
-                    case validMove of
-                        True ->
-                            case piece of
-                                Just p ->
-                                    togglePiece p
-
-                                Nothing ->
-                                    None
-
-                        False -> 
-                            case piece of
-                               Just p -> p
-                               Nothing -> None
+                    togglePiece piece oldPiece model.turn
 
                 newBoard =
                     Array.set location newPiece model.board
@@ -188,26 +174,23 @@ update msg model =
             ( model, Cmd.none )
 
 
-isValid : Int -> Piece -> Model -> Bool
-isValid location piece model=
-    let
-        oldPiece =
-                    Array.get location model.previousBoard
-          
-    in
-        case oldPiece of
-            Just p ->
-                case p of
-                   Explosion -> False
-                   _ -> True
-            Nothing -> False
-
-
-
 getPiece location model =
     let
         piece =
             Array.get location model.board
+    in
+    case piece of
+        Just p ->
+            p
+
+        Nothing ->
+            None
+
+
+getOldPiece location model =
+    let
+        piece =
+            Array.get location model.previousBoard
     in
     case piece of
         Just p ->
@@ -239,26 +222,39 @@ pieceString piece =
             "☁️"
 
 
-togglePiece : Piece -> Piece
-togglePiece piece =
-    case piece of
-        None ->
-            Jet1
+togglePiece : Piece -> Piece -> PlayerTurn -> Piece
+togglePiece piece oldPiece player =
+    case player of
+        One ->
+            case piece of
+                None ->
+                    Jet1
 
-        Jet1 ->
-            Rocket1
+                Jet2 ->
+                    Explosion
 
-        Rocket1 ->
-            Jet2
+                Rocket2 ->
+                    Explosion
 
-        Jet2 ->
-            Rocket2
+                Explosion ->
+                    oldPiece
 
-        Rocket2 ->
-            Explosion
+                _ ->
+                    oldPiece
 
-        Explosion ->
-            None
+        Two ->
+            case piece of
+                None ->
+                    Jet2
+
+                Jet2 ->
+                    Explosion
+
+                Explosion ->
+                    oldPiece
+
+                _ ->
+                    piece
 
 
 turnString : PlayerTurn -> String
